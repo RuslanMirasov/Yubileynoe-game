@@ -1,0 +1,14 @@
+:root {
+  --font: "ttfirsneue", sans-serif;
+
+  --white: #ffffff;
+  --black: #000000;
+  --red: #e22722;
+  --red-dark: #bd1818;
+  --green: #005a28;
+  --green-light: #a9c94c;
+  --invalid: #ffe26b;
+}
+
+@import "fonts";
+@import "reset";
