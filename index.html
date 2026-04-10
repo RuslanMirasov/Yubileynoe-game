@@ -10,8 +10,44 @@
     <title>Юбилейное</title>
   </head>
   <body>
+    <div class="preloader">
+      <img src="./assets/img/cookie.gif" alt="" />
+    </div>
+
     <main class="main">
-      <img src="./assets/img/logo.svg" alt="" />
+      <section class="start-page">
+        <div class="animated-background">
+          <div class="bg"></div>
+        </div>
+
+        <div class="container">
+          <a href="./">
+            <img src="./assets/img/logo.svg" alt="Юбилейное" class="logo anim-left" />
+          </a>
+
+          <div class="titles anim-top">
+            <h1 class="title title--h1">Юбилейное лови — свой приз забери!</h1>
+            <p class="subtitle small">
+              Вы&nbsp;попали на&nbsp;настоящую ярмарку с&nbsp;угощениями! Ловите печенье «Юбилейное» в&nbsp;корзину и&nbsp;получите приз!
+              Но&nbsp;будьте внимательнее: другие угощения отнимают баллы.
+            </p>
+          </div>
+
+          <div class="carusel">
+            <div class="carusel-images">
+              <img src="./assets/img/carusel-before.webp" alt="Юбилейное" class="anim-left slower" />
+              <img src="./assets/img/carusel-after.webp" alt="Юбилейное" class="anim-right slower" />
+              <img src="./assets/img/carusel.webp" alt="Юбилейное" class="anim-right" />
+              <img src="./assets/img/carusel-cookie.webp" alt="Юбилейное" class="anim-left" />
+            </div>
+          </div>
+
+          <div class="buttons">
+            <a href="./game.html" class="button anim-bottom"><span>Играть</span></a>
+            <a href="./rules.html" class="button small anim-bottom"><span>Правила</span></a>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script src="./assets/js/scripts.js" type="module" defer></script>

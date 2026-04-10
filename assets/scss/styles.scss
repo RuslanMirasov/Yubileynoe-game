@@ -1,5 +1,6 @@
 :root {
-  --font: "ttfirsneue", sans-serif;
+  --font: 'ttfirsneue', sans-serif;
+  --transition: cubic-bezier(0.4, 0, 0.2, 1);
 
   --white: #ffffff;
   --black: #000000;
@@ -10,5 +11,9 @@
   --invalid: #ffe26b;
 }
 
-@import "fonts";
-@import "reset";
+@import 'fonts';
+@import 'animation';
+@import 'reset';
+@import 'typography';
+@import 'start_page';
+@import 'buttons';

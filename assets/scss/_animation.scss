@@ -1,0 +1,46 @@
+.anim-left,
+.anim-right,
+.anim-top,
+.anim-bottom {
+  position: relative;
+  opacity: 0;
+  transition: 1.2s var(--transition);
+}
+
+.anim-left {
+  transform: translate(-100%, 0%);
+  &.slower {
+    transform: translate(-50%, 0%);
+  }
+}
+
+.anim-right {
+  transform: translate(100%, 0%);
+  &.slower {
+    transform: translate(50%, 0%);
+  }
+}
+
+.anim-top {
+  transform: translate(0%, -100%);
+  &.slower {
+    transform: translate(0%, -50%);
+  }
+}
+
+.anim-bottom {
+  transform: translate(0%, 100%);
+  &.slower {
+    transform: translate(0%, 50%);
+  }
+}
+
+.loaded {
+  .anim-left,
+  .anim-right,
+  .anim-top,
+  .anim-bottom {
+    opacity: 1;
+    transform: translate(0%, 0%);
+  }
+}

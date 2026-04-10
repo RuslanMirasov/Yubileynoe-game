@@ -1,3 +1,3 @@
-import { initPreloader } from "./preloader.js";
+import { initPreloader } from './preloader.js';
 
-initPreloader(1000);
+initPreloader(2000);

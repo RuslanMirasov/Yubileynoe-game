@@ -1,0 +1,48 @@
+.buttons {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  overflow: hidden;
+  gap: 12px;
+  z-index: 4;
+}
+
+.button {
+  display: inline-flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font);
+  font-weight: 700;
+  border-radius: 48px;
+  border: none;
+  padding: 10px 30px;
+
+  min-width: 260px;
+  border-bottom: 3px solid var(--green-light);
+  font-size: 18px;
+  height: 48px;
+  background: var(--green);
+  color: var(--white);
+
+  span {
+    display: block;
+    line-height: 1;
+  }
+
+  &.small {
+    min-width: 152px;
+    border-bottom: none;
+    font-size: 14px;
+    height: 30px;
+    background: var(--green-light);
+    color: var(--green);
+  }
+}
