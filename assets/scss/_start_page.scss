@@ -50,9 +50,9 @@
       width: 100%;
       height: 100%;
       background: url('../img/bg.svg') repeat center top;
-      background-size: 18.3206vh 18.3206vh;
-      transform: scale(2.2) translate(0%, 0%);
-      transition: 1s var(--transition);
+      background-size: 220px 220px;
+      transform-origin: center top;
+      transition: 1.5s var(--transition);
       z-index: 1;
     }
 
@@ -67,7 +67,7 @@
       height: 100%;
       transform: translate(100%, 0%);
       opacity: 0;
-      transition: 1s var(--transition);
+      transition: 1.2s var(--transition);
     }
 
     &:before {
@@ -81,14 +81,10 @@
       height: 100%;
       transform: scaleX(-1) translate(100%, 0%);
       opacity: 0;
-      transition: 1s var(--transition);
+      transition: 1.2s var(--transition);
     }
 
     @media (orientation: landscape) and (max-width: 1023px) {
-      .bg {
-        background-size: 18.3206vw 18.3206vw;
-      }
-
       &:after {
         background-size: auto calc(18.3206vw * 6);
         width: calc(50% + 18.3206vw / 2);
@@ -108,7 +104,10 @@
   .start-page {
     .animated-background {
       .bg {
-        transform: scale(1) translate(0%, 0%);
+        background-size: 18.3206vh 18.3206vh;
+        @media (orientation: landscape) and (max-width: 1023px) {
+          background-size: 18.3206vw 18.3206vw;
+        }
       }
       &:after {
         transform: translate(0%, 0%);

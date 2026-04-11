@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#E22722" />
+    <meta name="description" content="Мираторг - Гриль охота" />
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
+    <link rel="stylesheet" href="./assets/css/styles.min.css" />
+    <title>Правила</title>
+  </head>
+  <body>
+    <div class="preloader">
+      <img src="./assets/img/cookie.gif" alt="" />
+    </div>
+
+    <main class="main">
+      <section class="game-page">
+        <div class="animated-background">
+          <div class="bg"></div>
+        </div>
+
+        <div class="container">
+          <!--POINTS-->
+          <div class="points anim-top">
+            <div class="bank" data-target-points>
+              <div class="point lose"><span>0</span></div>
+            </div>
+
+            <div class="bank" data-my-points>
+              <div class="point win"><span>0</span></div>
+            </div>
+          </div>
+
+          <!--GAME CANVAS-->
+          <div class="game-canvas" data-game-canvas>
+            <div class="falling-item apple in-basket-zone" data-minus></div>
+            <div class="falling-item baranka in-basket-zone" data-minus></div>
+            <div class="falling-item cock in-basket-zone" data-minus></div>
+            <div class="falling-item cookie in-basket-zone" data-plus></div>
+
+            <!--BASKET-->
+            <div class="basket basket-shadow" data-basket-back></div>
+            <div class="basket" data-basket>
+              <div data-target-scanner></div>
+            </div>
+            <!--BASKET END-->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./assets/js/scripts.js" type="module" defer></script>
+  </body>
+</html>
