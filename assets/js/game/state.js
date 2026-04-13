@@ -9,5 +9,13 @@ export const createGameState = () => {
     pointerActive: false,
 
     rafId: null,
+    scanRafId: null,
+    spawnRafId: null,
+    fallRafId: null,
+
+    gameStartTime: 0,
+    spawnQueue: [],
+    spawnIndex: 0,
+    activeItems: [],
   };
 };

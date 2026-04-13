@@ -744,10 +744,14 @@ img {
 }
 .falling-item.baranka {
   background: url("../img/baranka.webp") no-repeat center center/cover;
+  left: 27%;
+  bottom: 10px;
 }
 .falling-item.cock {
   height: 80px;
   background: url("../img/cock.webp") no-repeat center center/cover;
+  left: 67%;
+  bottom: 10px;
 }
 .falling-item.in-basket-zone {
   z-index: 2;
