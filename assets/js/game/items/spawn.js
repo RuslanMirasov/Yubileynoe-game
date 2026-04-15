@@ -1,6 +1,8 @@
 ﻿import { CANVAS_SIDE_PADDING, COOKIES_SUM, ENEMYS_SUM, END_SPEED_MULTIPLIER, FALLING_OBJECTS, FALL_SPEED, GAME_TIME } from '../constants.js';
 import { ITEM_TYPES } from './types.js';
 
+const SPEED_STEP_ITEMS = 5;
+
 const createElementFromMarkup = markup => {
   const template = document.createElement('template');
   template.innerHTML = markup.trim();
@@ -48,6 +50,18 @@ const buildRoundItems = () => {
     enemyIndex += 1;
     enemiesLeft -= 1;
   }
+
+  if (items.length <= 1) return items;
+
+  const lastCookieIndex = items.map(item => item.name).lastIndexOf('cookie');
+
+  if (lastCookieIndex === -1 || lastCookieIndex === items.length - 1) {
+    return items;
+  }
+
+  const lastItem = items[items.length - 1];
+  items[items.length - 1] = items[lastCookieIndex];
+  items[lastCookieIndex] = lastItem;
 
   return items;
 };
@@ -115,10 +129,12 @@ const createSpawnSchedule = ({ canvas, basket, scanner, itemMetrics }) => {
   const interval = GAME_TIME / totalItems;
   const baseDuration = (travelDistance / FALL_SPEED) * 1000;
   const laneQueue = shuffleArray(lanes);
+  const speedStepCount = Math.max(1, Math.ceil(totalItems / SPEED_STEP_ITEMS));
   let previousLaneIndex = -1;
 
   return roundItems.map((itemType, itemIndex) => {
-    const progress = totalItems === 1 ? 0 : itemIndex / (totalItems - 1);
+    const speedStepIndex = Math.min(speedStepCount - 1, Math.floor(itemIndex / SPEED_STEP_ITEMS));
+    const progress = speedStepCount === 1 ? 0 : speedStepIndex / (speedStepCount - 1);
     const metrics = itemMetrics[itemType.name];
     const startTop = -Math.max(metrics.height, tallestItem);
     const duration = baseDuration / (1 + (END_SPEED_MULTIPLIER - 1) * progress);
@@ -203,4 +219,13 @@ export const initItemsSpawn = ({ canvas, basket, scanner, state, registerItem })
   };
 
   state.spawnRafId = requestAnimationFrame(tick);
+
+  return {
+    destroy() {
+      if (state.spawnRafId) {
+        cancelAnimationFrame(state.spawnRafId);
+        state.spawnRafId = null;
+      }
+    },
+  };
 };

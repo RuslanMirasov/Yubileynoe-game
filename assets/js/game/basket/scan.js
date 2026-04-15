@@ -3,22 +3,18 @@ import { getClientRect, getHorizontalIntersectionRatio } from '../utils/rect.js'
 export const initBasketScan = ({ canvas, scanner, state }) => {
   if (!canvas || !scanner || !state) return;
 
-  const getItems = () => canvas.querySelectorAll('.falling-item');
-
   const updateItemZoneState = item => {
-    const itemRect = getClientRect(item);
+    if (!item?.element) return;
+
+    const itemRect = getClientRect(item.element);
     const scannerRect = getClientRect(scanner);
 
     const intersectionRatio = getHorizontalIntersectionRatio(itemRect, scannerRect);
-    const isInBasketZone = intersectionRatio > 0.5;
-
-    item.classList.toggle('in-basket-zone', isInBasketZone);
+    item.isInBasketZone = intersectionRatio > 0.5;
   };
 
   const updateAllItemsZoneState = () => {
-    const items = getItems();
-
-    items.forEach(updateItemZoneState);
+    state.activeItems.forEach(updateItemZoneState);
   };
 
   const tick = () => {
@@ -30,6 +26,12 @@ export const initBasketScan = ({ canvas, scanner, state }) => {
   state.scanRafId = requestAnimationFrame(tick);
 
   return {
+    destroy() {
+      if (state.scanRafId) {
+        cancelAnimationFrame(state.scanRafId);
+        state.scanRafId = null;
+      }
+    },
     updateAllItemsZoneState,
     updateItemZoneState,
   };

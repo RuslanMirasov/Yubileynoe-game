@@ -267,6 +267,13 @@ img {
       align-content: center;
   gap: 8px;
   padding-top: 20px;
+}
+@media (max-height: 640px) {
+  .start-page .titles {
+    padding-top: 0px;
+  }
+}
+.start-page .titles {
   z-index: 3;
 }
 .start-page .titles .subtitle {
@@ -753,7 +760,7 @@ img {
   left: 67%;
   bottom: 10px;
 }
-.falling-item.in-basket-zone {
+.falling-item.is-captured {
   z-index: 2;
 }
 
@@ -808,6 +815,7 @@ div[data-target-scanner] {
   border-radius: 48px;
   border: none;
   padding: 10px 30px;
+  cursor: pointer;
   min-width: 260px;
   border-bottom: 3px solid var(--green-light);
   font-size: 18px;
@@ -826,4 +834,81 @@ div[data-target-scanner] {
   height: 30px;
   background: var(--green-light);
   color: var(--green);
+}
+
+.popup {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: opacity 0.5s var(--transition);
+  transition: opacity 0.5s var(--transition);
+  backdrop-filter: blur(10px);
+  background: url("../img/popup-bg.webp") no-repeat center center/cover;
+}
+.popup.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 30px;
+  height: auto;
+  min-height: 100svh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  padding: 20px 10px 30px 10px;
+  text-align: center;
+}
+.popup__content .buttons {
+  gap: 24px;
+}
+
+.game-results {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  gap: 20px;
+}
+.game-results .lose {
+  width: 160px;
+}
+.game-results .winn {
+  width: 242px;
+}
+.game-results .title {
+  font-size: 32px;
 }

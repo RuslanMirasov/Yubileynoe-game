@@ -12,6 +12,7 @@ export const createGameState = () => {
     scanRafId: null,
     spawnRafId: null,
     fallRafId: null,
+    finishRafId: null,
 
     gameStartTime: 0,
     spawnQueue: [],
@@ -20,5 +21,6 @@ export const createGameState = () => {
 
     myPoints: 0,
     targetPoints: 0,
+    isGameFinished: false,
   };
 };

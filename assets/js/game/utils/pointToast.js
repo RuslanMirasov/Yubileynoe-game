@@ -7,20 +7,29 @@ let pointToastContext = null;
 const renderPoints = () => {
   if (!pointToastContext) return;
 
-  pointToastContext.plusPoints.textContent = String(pointToastContext.state.myPoints);
-  pointToastContext.minusPoints.textContent = String(pointToastContext.state.targetPoints);
+  pointToastContext.plusPoints.forEach(pointElement => {
+    pointElement.textContent = String(pointToastContext.state.myPoints);
+  });
+
+  pointToastContext.minusPoints.forEach(pointElement => {
+    pointElement.textContent = String(pointToastContext.state.targetPoints);
+  });
 };
 
 const renderMyPoints = () => {
   if (!pointToastContext) return;
 
-  pointToastContext.plusPoints.textContent = String(pointToastContext.state.myPoints);
+  pointToastContext.plusPoints.forEach(pointElement => {
+    pointElement.textContent = String(pointToastContext.state.myPoints);
+  });
 };
 
 const renderTargetPoints = () => {
   if (!pointToastContext) return;
 
-  pointToastContext.minusPoints.textContent = String(pointToastContext.state.targetPoints);
+  pointToastContext.minusPoints.forEach(pointElement => {
+    pointElement.textContent = String(pointToastContext.state.targetPoints);
+  });
 };
 
 const createToastElement = ({ sourceBank, value, className }) => {
@@ -100,7 +109,8 @@ export const initPointToast = ({ state, plusPoints, minusPoints }) => {
   const targetBank = document.querySelector('[data-target-bank]');
   const myBank = document.querySelector('[data-my-bank]');
 
-  if (!state || !plusPoints || !minusPoints || !targetBank || !myBank) return;
+  if (!state || !Array.isArray(plusPoints) || !Array.isArray(minusPoints) || plusPoints.length === 0 || minusPoints.length === 0 || !targetBank || !myBank)
+    return;
 
   pointToastContext = {
     state,

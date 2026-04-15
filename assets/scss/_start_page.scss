@@ -29,6 +29,9 @@
     align-content: center;
     gap: 8px;
     padding-top: 20px;
+    @media (max-height: 640px) {
+      padding-top: 0px;
+    }
     z-index: 3;
     .subtitle {
       max-width: 285px;

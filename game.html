@@ -53,6 +53,43 @@
       </section>
     </main>
 
+    <!--POPUPS-->
+    <div class="popup" id="try-again">
+      <div class="popup__content">
+        <img src="./assets/img/logo.svg" alt="Юбилейное" class="logo" />
+
+        <div class="game-results">
+          <img src="./assets/img/lose.webp" alt="" class="popup-image lose" />
+          <h2 class="title">Вы были так <br />близки к&nbsp;победе!</h2>
+          <p class="text"><span data-my-points>14</span> печенек уже в корзине — давайте <br />попробуем ещё раз!</p>
+        </div>
+
+        <div class="buttons">
+          <button class="button" data-restart-game><span>Играть снова</span></button>
+          <a href="./" class="button small"><span>Выйти</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup" id="success">
+      <div class="popup__content">
+        <img src="./assets/img/logo.svg" alt="Юбилейное" class="logo" />
+
+        <div class="game-results">
+          <img src="./assets/img/winn.webp" alt="" class="popup-image winn" />
+          <h2 class="title">Вот это улов!</h2>
+          <p class="text">
+            <span data-my-points>20</span> печенек в&nbsp;корзине —<br />вы&nbsp;справились! <br />Забирайте приз и&nbsp;возвращайтесь
+            <br />за&nbsp;новым рекордом.
+          </p>
+        </div>
+
+        <div class="buttons">
+          <button class="button" data-restart-game><span>Играть заново</span></button>
+          <a href="#" class="button small"><span>Забрать приз</span></a>
+        </div>
+      </div>
+    </div>
     <script src="./assets/js/scripts.js" type="module" defer></script>
   </body>
 </html>

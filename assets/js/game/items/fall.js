@@ -12,7 +12,7 @@ export const initItemsFall = ({ canvas, basket, state, onItemCatch }) => {
   const registerItem = item => {
     if (!item?.element) return;
 
-    state.activeItems.push({
+    const activeItem = {
       ...item,
       startedAt: performance.now(),
       travelDistance: canvas.clientHeight + item.height * 2,
@@ -20,8 +20,12 @@ export const initItemsFall = ({ canvas, basket, state, onItemCatch }) => {
       isCaptured: false,
       isResolved: false,
       isOut: false,
+      isInBasketZone: false,
       captureOffsetX: 0,
-    });
+    };
+
+    item.element.__gameItem = activeItem;
+    state.activeItems.push(activeItem);
 
     canvas.prepend(item.element);
   };
@@ -36,11 +40,12 @@ export const initItemsFall = ({ canvas, basket, state, onItemCatch }) => {
     if (!hasReachedCatchLine) return;
 
     item.isOut = true;
-    if (!item.element.classList.contains('in-basket-zone')) return;
+    if (!item.isInBasketZone) return;
 
     item.isCaptured = true;
     item.isResolved = true;
     item.captureOffsetX = item.left - state.basketX;
+    item.element.classList.add('is-captured');
 
     onItemCatch?.(item);
   };
@@ -77,6 +82,15 @@ export const initItemsFall = ({ canvas, basket, state, onItemCatch }) => {
   state.fallRafId = requestAnimationFrame(tick);
 
   return {
+    destroy() {
+      if (state.fallRafId) {
+        cancelAnimationFrame(state.fallRafId);
+        state.fallRafId = null;
+      }
+
+      state.activeItems.forEach(removeItem);
+      state.activeItems = [];
+    },
     registerItem,
   };
 };

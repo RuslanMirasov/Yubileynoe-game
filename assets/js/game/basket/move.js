@@ -125,6 +125,20 @@ export const initBasketMove = ({ canvas, basket, basketBack, state }) => {
   state.rafId = requestAnimationFrame(tick);
 
   return {
+    destroy() {
+      if (state.rafId) {
+        cancelAnimationFrame(state.rafId);
+        state.rafId = null;
+      }
+
+      canvas.removeEventListener('pointerdown', onPointerDown);
+      canvas.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keyup', onKeyUp);
+      window.removeEventListener('resize', onResize);
+    },
     updateBounds,
     renderBasket,
     setBasketByClientX,

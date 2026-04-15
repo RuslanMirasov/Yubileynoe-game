@@ -4,7 +4,7 @@ import { initPointToast, pointToast } from '../utils/pointToast.js';
 import { playCatchSound } from '../utils/sound.js';
 
 export const initPoints = ({ plusPoints, minusPoints, state }) => {
-  if (!plusPoints || !minusPoints || !state) return;
+  if (!Array.isArray(plusPoints) || !Array.isArray(minusPoints) || plusPoints.length === 0 || minusPoints.length === 0 || !state) return;
 
   state.myPoints = 0;
   state.targetPoints = COOKIES_SUM;
