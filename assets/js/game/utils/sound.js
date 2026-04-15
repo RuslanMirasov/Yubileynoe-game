@@ -31,14 +31,18 @@ export const initGameAudio = () => {
 
   const unlockAudio = () => {
     startBackgroundAudio();
-    window.removeEventListener('pointerdown', unlockAudio);
+    document.removeEventListener('pointerdown', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('mousedown', unlockAudio);
+    document.removeEventListener('click', unlockAudio);
     window.removeEventListener('keydown', unlockAudio);
-    window.removeEventListener('touchstart', unlockAudio);
   };
 
-  window.addEventListener('pointerdown', unlockAudio, { once: true });
+  document.addEventListener('pointerdown', unlockAudio, { once: true, capture: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true, capture: true });
+  document.addEventListener('mousedown', unlockAudio, { once: true, capture: true });
+  document.addEventListener('click', unlockAudio, { once: true, capture: true });
   window.addEventListener('keydown', unlockAudio, { once: true });
-  window.addEventListener('touchstart', unlockAudio, { once: true });
 };
 
 export const playCatchSound = scoreType => {

@@ -7,6 +7,13 @@ import { initPoints } from './score/points.js';
 import { initGameAudio } from './utils/sound.js';
 
 export const initGame = (delay = 0) => {
+  const gameCanvas = document.querySelector('[data-game-canvas]');
+  const gameBasket = document.querySelector('[data-basket]');
+
+  if (!gameCanvas || !gameBasket) return;
+
+  initGameAudio();
+
   const startGame = () => {
     const canvas = document.querySelector('[data-game-canvas]');
     const basket = document.querySelector('[data-basket]');
@@ -18,8 +25,6 @@ export const initGame = (delay = 0) => {
     if (!canvas || !basket || !basketBack || !targetScanner) return;
 
     const state = createGameState();
-
-    initGameAudio();
 
     const elements = {
       canvas,
