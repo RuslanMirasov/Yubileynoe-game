@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#E22722" />
-    <meta name="description" content="Мираторг - Гриль охота" />
+    <meta name="description" content="Юбилейное" />
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
     <link rel="stylesheet" href="./assets/css/styles.min.css" />
     <title>Правила</title>
   </head>
   <body>
     <div class="preloader">
-      <img src="./assets/img/cookie.gif" alt="" />
+      <img src="./assets/img/cookie.gif" alt="Юбилейное" />
     </div>
 
     <main class="main">
@@ -54,12 +54,14 @@
     </main>
 
     <!--POPUPS-->
+
+    <!--GAME-OVER POPUP-->
     <div class="popup" id="try-again">
       <div class="popup__content">
         <img src="./assets/img/logo.svg" alt="Юбилейное" class="logo" />
 
         <div class="game-results">
-          <img src="./assets/img/lose.webp" alt="" class="popup-image lose" />
+          <img src="./assets/img/lose.webp" alt="Юбилейное" class="popup-image lose" />
           <h2 class="title">Вы были так <br />близки к&nbsp;победе!</h2>
           <p class="text"><span data-my-points>14</span> печенек уже в корзине — давайте <br />попробуем ещё раз!</p>
         </div>
@@ -71,12 +73,13 @@
       </div>
     </div>
 
+    <!--SUCCESS POPUP-->
     <div class="popup" id="success">
       <div class="popup__content">
         <img src="./assets/img/logo.svg" alt="Юбилейное" class="logo" />
 
         <div class="game-results">
-          <img src="./assets/img/winn.webp" alt="" class="popup-image winn" />
+          <img src="./assets/img/winn.webp" alt="Юбилейное" class="popup-image winn" />
           <h2 class="title">Вот это улов!</h2>
           <p class="text">
             <span data-my-points>20</span> печенек в&nbsp;корзине —<br />вы&nbsp;справились! <br />Забирайте приз и&nbsp;возвращайтесь
@@ -90,6 +93,8 @@
         </div>
       </div>
     </div>
+
+    <!--SCRIPTS-->
     <script src="./assets/js/scripts.js" type="module" defer></script>
   </body>
 </html>
