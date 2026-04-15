@@ -1,16 +1,10 @@
-// Скорость движения корзины при управлении стрелками
-export const KEYBOARD_SPEED = 12;
-
-// Время одного раунда
+﻿export const KEYBOARD_SPEED = 12;
+export const FALL_SPEED = 150;
+export const CANVAS_SIDE_PADDING = 20;
+export const END_SPEED_MULTIPLIER = 1.5;
 export const GAME_TIME = 1000 * 60;
-
-// Кол-во печенек
 export const COOKIES_SUM = 20;
-
-// Кол-во врагов
-export const ENEMYS_SUM = 50;
-
-// Персонажи
+export const ENEMYS_SUM = 40;
 export const FALLING_OBJECTS = [
   { name: 'cookie', markup: '<div class="falling-item cookie" data-plus></div>' },
   { name: 'apple', markup: '<div class="falling-item apple" data-minus></div>' },

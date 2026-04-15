@@ -99,7 +99,7 @@
         background: var(--white);
         z-index: 1;
         transform: rotate(45deg);
-        transition: 1s var(--transition);
+        transition: opacity 1s var(--transition);
         opacity: 0;
       }
 
@@ -112,7 +112,7 @@
         background: url('../img/cookie.svg') no-repeat center center/cover;
         z-index: 1;
         transform: rotate(-6.62deg);
-        transition: 1s var(--transition);
+        transition: opacity 1s var(--transition);
         opacity: 0;
       }
 

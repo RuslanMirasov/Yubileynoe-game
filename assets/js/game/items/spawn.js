@@ -1,7 +1,5 @@
-import { COOKIES_SUM, ENEMYS_SUM, FALLING_OBJECTS, GAME_TIME } from '../constants.js';
-
-const CANVAS_SIDE_PADDING = 20;
-const END_SPEED_MULTIPLIER = 1.2;
+﻿import { CANVAS_SIDE_PADDING, COOKIES_SUM, ENEMYS_SUM, END_SPEED_MULTIPLIER, FALLING_OBJECTS, FALL_SPEED, GAME_TIME } from '../constants.js';
+import { ITEM_TYPES } from './types.js';
 
 const createElementFromMarkup = markup => {
   const template = document.createElement('template');
@@ -88,7 +86,6 @@ const createLaneModel = ({ canvasWidth, basketWidth, scannerWidth, itemMetrics }
   for (let laneIndex = 0; laneIndex < laneCount; laneIndex += 1) {
     lanes.push({
       ratio: laneCount === 1 ? 0.5 : laneIndex / (laneCount - 1),
-      availableAt: 0,
     });
   }
 
@@ -114,22 +111,32 @@ const createSpawnSchedule = ({ canvas, basket, scanner, itemMetrics }) => {
     itemMetrics,
   });
   const tallestItem = Math.max(...Object.values(itemMetrics).map(metric => metric.height));
+  const travelDistance = canvas.clientHeight + tallestItem * 2;
   const interval = GAME_TIME / totalItems;
-  const baseDuration = Math.max(interval * lanes.length * 0.9, 1600);
-  const jitter = interval / Math.max(4, lanes.length + 1);
+  const baseDuration = (travelDistance / FALL_SPEED) * 1000;
+  const laneQueue = shuffleArray(lanes);
+  let previousLaneIndex = -1;
 
   return roundItems.map((itemType, itemIndex) => {
     const progress = totalItems === 1 ? 0 : itemIndex / (totalItems - 1);
     const metrics = itemMetrics[itemType.name];
+    const startTop = -Math.max(metrics.height, tallestItem);
     const duration = baseDuration / (1 + (END_SPEED_MULTIPLIER - 1) * progress);
-    const plannedSpawnTime = interval * itemIndex + (itemIndex % 2 === 0 ? -jitter : jitter);
-    const preferredSpawnTime = Math.max(0, plannedSpawnTime);
-    const freeLanes = lanes.filter(lane => lane.availableAt <= preferredSpawnTime);
-    const lanePool = freeLanes.length > 0 ? shuffleArray(freeLanes) : [...lanes].sort((leftLane, rightLane) => leftLane.availableAt - rightLane.availableAt);
-    const lane = lanePool[0];
-    const spawnTime = Math.max(preferredSpawnTime, lane.availableAt);
+    const spawnTime = interval * itemIndex;
 
-    lane.availableAt = spawnTime + duration;
+    let lane = laneQueue.shift();
+
+    if (!lane) {
+      laneQueue.push(...shuffleArray(lanes));
+      lane = laneQueue.shift();
+    }
+
+    if (lane && lanes.length > 1 && lane.ratio === lanes[previousLaneIndex]?.ratio) {
+      laneQueue.push(lane);
+      lane = laneQueue.shift() || lane;
+    }
+
+    previousLaneIndex = lanes.findIndex(currentLane => currentLane.ratio === lane.ratio);
 
     return {
       id: `${itemType.name}-${itemIndex}`,
@@ -143,7 +150,7 @@ const createSpawnSchedule = ({ canvas, basket, scanner, itemMetrics }) => {
         laneRatio: lane.ratio,
         itemWidth: metrics.width,
       }),
-      startTop: -Math.max(metrics.height, tallestItem),
+      startTop,
     };
   });
 };
@@ -172,6 +179,7 @@ export const initItemsSpawn = ({ canvas, basket, scanner, state, registerItem })
     registerItem({
       id: itemConfig.id,
       type: itemConfig.itemType.name,
+      scoreType: element.hasAttribute('data-plus') ? ITEM_TYPES.PLUS : ITEM_TYPES.MINUS,
       duration: itemConfig.duration,
       width: itemConfig.width,
       height: itemConfig.height,

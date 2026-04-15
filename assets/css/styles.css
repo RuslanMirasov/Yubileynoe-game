@@ -637,8 +637,8 @@ img {
   -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
           transform: rotate(45deg);
-  -webkit-transition: 1s var(--transition);
-  transition: 1s var(--transition);
+  -webkit-transition: opacity 1s var(--transition);
+  transition: opacity 1s var(--transition);
   opacity: 0;
 }
 .points .bank .point:before {
@@ -652,8 +652,8 @@ img {
   -webkit-transform: rotate(-6.62deg);
       -ms-transform: rotate(-6.62deg);
           transform: rotate(-6.62deg);
-  -webkit-transition: 1s var(--transition);
-  transition: 1s var(--transition);
+  -webkit-transition: opacity 1s var(--transition);
+  transition: opacity 1s var(--transition);
   opacity: 0;
 }
 .points .bank .point.win:after {

@@ -17,5 +17,8 @@ export const createGameState = () => {
     spawnQueue: [],
     spawnIndex: 0,
     activeItems: [],
+
+    myPoints: 0,
+    targetPoints: 0,
   };
 };

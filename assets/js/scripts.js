@@ -1,5 +1,8 @@
 import { initPreloader } from './preloader.js';
 import { initGame } from './game/index.js';
 
-initPreloader(1000);
-initGame();
+const PRELOADER_DELAY = 500;
+const INIT_GAME_DELAY = 2000;
+
+initPreloader(PRELOADER_DELAY);
+initGame(INIT_GAME_DELAY);

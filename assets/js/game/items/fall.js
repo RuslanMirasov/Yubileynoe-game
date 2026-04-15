@@ -1,5 +1,9 @@
-export const initItemsFall = ({ canvas, state }) => {
-  if (!canvas || !state) return;
+import { getClientRect } from '../utils/rect.js';
+
+const CATCH_OFFSET = 17;
+
+export const initItemsFall = ({ canvas, basket, state, onItemCatch }) => {
+  if (!canvas || !basket || !state) return;
 
   const removeItem = item => {
     item.element.remove();
@@ -12,13 +16,38 @@ export const initItemsFall = ({ canvas, state }) => {
       ...item,
       startedAt: performance.now(),
       travelDistance: canvas.clientHeight + item.height * 2,
+      left: Number.parseFloat(item.element.style.left) || 0,
+      isCaptured: false,
+      isResolved: false,
+      isOut: false,
+      captureOffsetX: 0,
     });
 
-    canvas.appendChild(item.element);
+    canvas.prepend(item.element);
+  };
+
+  const tryCaptureItem = (item, basketRect) => {
+    if (item.isResolved || item.isOut) return;
+
+    const itemRect = getClientRect(item.element);
+    const catchLine = basketRect.top + CATCH_OFFSET;
+    const hasReachedCatchLine = itemRect.bottom >= catchLine;
+
+    if (!hasReachedCatchLine) return;
+
+    item.isOut = true;
+    if (!item.element.classList.contains('in-basket-zone')) return;
+
+    item.isCaptured = true;
+    item.isResolved = true;
+    item.captureOffsetX = item.left - state.basketX;
+
+    onItemCatch?.(item);
   };
 
   const tick = now => {
     const nextActiveItems = [];
+    const basketRect = getClientRect(basket);
 
     state.activeItems.forEach(item => {
       const elapsed = now - item.startedAt;
@@ -27,6 +56,13 @@ export const initItemsFall = ({ canvas, state }) => {
       if (progress >= 1) {
         removeItem(item);
         return;
+      }
+
+      tryCaptureItem(item, basketRect);
+
+      if (item.isCaptured) {
+        item.left = state.basketX + item.captureOffsetX;
+        item.element.style.left = `${item.left}px`;
       }
 
       const nextTop = -item.height + item.travelDistance * progress;
