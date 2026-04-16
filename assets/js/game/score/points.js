@@ -18,7 +18,7 @@ export const initPoints = ({ plusPoints, minusPoints, state }) => {
   const handlePlusCatch = () => {
     state.targetPoints = Math.max(0, state.targetPoints - 1);
     state.myPoints += 1;
-    pointToast('plus');
+    pointToast();
   };
 
   const handleMinusCatch = () => {
@@ -26,7 +26,7 @@ export const initPoints = ({ plusPoints, minusPoints, state }) => {
 
     state.myPoints -= 1;
     state.targetPoints += 1;
-    pointToast('minus');
+    pointToast();
   };
 
   const handleItemCatch = item => {

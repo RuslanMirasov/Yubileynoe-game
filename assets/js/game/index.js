@@ -45,15 +45,25 @@ export const initGame = (delay = 0) => {
     const basket = document.querySelector('[data-basket]');
     const basketBack = document.querySelector('[data-basket-back]');
     const targetScanner = document.querySelector('[data-target-scanner]');
+    const timerElements = Array.from(document.querySelectorAll('[data-timer]'));
     const plusPoints = Array.from(document.querySelectorAll('[data-my-points]'));
     const minusPoints = Array.from(document.querySelectorAll('[data-target-points]'));
 
-    if (!canvas || !basket || !basketBack || !targetScanner || plusPoints.length === 0 || minusPoints.length === 0) return;
+    if (!canvas || !basket || !basketBack || !targetScanner || timerElements.length === 0 || plusPoints.length === 0 || minusPoints.length === 0) return;
 
     cleanupCurrentGame();
     window.popup?.close?.();
 
     const state = createGameState();
+    const renderTimer = now => {
+      const elapsed = typeof now === 'number' ? now - state.gameStartTime : 0;
+      const timeLeftMs = Math.max(0, GAME_TIME - elapsed);
+      const secondsLeft = Math.max(0, Math.ceil(timeLeftMs / 1000) - 1);
+
+      timerElements.forEach(timerElement => {
+        timerElement.textContent = String(secondsLeft);
+      });
+    };
 
     const elements = {
       canvas,
@@ -127,6 +137,8 @@ export const initGame = (delay = 0) => {
       const allItemsSpawned = state.spawnIndex >= state.spawnQueue.length;
       const noActiveItems = state.activeItems.length === 0;
 
+      renderTimer(now);
+
       if (isRoundTimeOver && allItemsSpawned && noActiveItems) {
         finishGame();
         return;
@@ -146,6 +158,7 @@ export const initGame = (delay = 0) => {
       },
     };
 
+    renderTimer();
     state.finishRafId = requestAnimationFrame(finishTick);
   };
 
