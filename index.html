@@ -44,11 +44,33 @@
 
           <div class="buttons">
             <a href="./game.html" class="button anim-bottom"><span>Играть</span></a>
+            <button type="button" class="button anim-bottom" onclick="window.popup.open('promocode')"><span>Промокод</span></button>
             <a href="./rules.html" class="button small anim-bottom"><span>Правила</span></a>
           </div>
         </div>
       </section>
     </main>
+
+    <!--SUCCESS POPUP-->
+    <div class="popup" id="promocode">
+      <div class="popup__content">
+        <img src="./assets/img/logo.svg" alt="Юбилейное" class="logo" />
+
+        <div class="game-results">
+          <img src="./assets/img/winn.webp" alt="Юбилейное" class="popup-image winn" />
+        </div>
+
+        <div class="game-results">
+          <p class="text">Ваш промокод</p>
+          <h2 class="title">ZNVDE09A4NUR</h2>
+        </div>
+
+        <div class="buttons">
+          <a href="#" class="button"><span>Как активировать?</span></a>
+          <a href="#" class="button small" onclick="window.popup.close()"><span>Выйти</span></a>
+        </div>
+      </div>
+    </div>
 
     <script src="./assets/js/scripts.js" type="module" defer></script>
   </body>
